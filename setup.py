@@ -14,7 +14,7 @@ setup(
     author='@yro',
     author_email='greg@willowgrain.io',
     license='',
-    packages=['ff_compile'],
+    packages=['ff_compiler'],
     include_package_data=True,
     install_requires=[
         'pyyaml',
@@ -24,4 +24,9 @@ setup(
     tests_require=['nose'],
     zip_safe=False
     )
+
+
+FF = FFCompiler()
+if FF.check() is False:
+    FF.run()
 

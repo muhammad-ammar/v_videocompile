@@ -1,0 +1,2 @@
+include ffmpeg_repos.yaml
+include README.rst

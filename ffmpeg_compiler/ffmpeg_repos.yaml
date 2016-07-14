@@ -1,0 +1,46 @@
+---
+# YASM
+- yasm:
+    url: --depth 1 git://github.com/yasm/yasm.git
+    dir: yasm
+    commands:
+        - autoreconf -fiv
+        - ./configure 
+        - make
+        - make install
+        - make distclean
+# x264
+- x264:
+    url: --depth 1 git://git.videolan.org/x264
+    dir: x264
+    commands:
+        - ./configure 
+        - make
+        - make install
+        - make distclean
+# LAME
+#---
+# Sourceforge is having some issues, so we're going to skip this
+#---
+# - LAME:
+    # url: curl -L -O http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
+    # unpack: tar xzvf lame-3.99.5.tar.gz
+    # dir: lame-3.99.5
+    # commands:
+        # - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm
+        # - make
+        # - make install`
+        # - make distclean
+
+# ffmpeg
+- ffmpeg:
+    url: https://git.ffmpeg.org/ffmpeg.git ffmpeg
+    dir: ffmpeg
+    commands:
+        - ./configure  --enable-gpl --enable-nonfree --enable-libx264 --disable-ffplay --disable-ffserver
+        - make
+        # - make install
+        # - make distclean
+        # - hash -r
+
+...

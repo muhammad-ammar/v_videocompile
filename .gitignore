@@ -1,0 +1,6 @@
+
+ff_compiler.egg-info/
+
+ffmpeg_compiler/ffmpeg_build/
+
+*.pyc
