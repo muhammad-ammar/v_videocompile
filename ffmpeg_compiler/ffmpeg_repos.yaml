@@ -6,6 +6,7 @@
     commands:
         - autoreconf -fiv
         - ./configure 
+        #--prefix="$ENCODE_LIB/ffmpeg_build" --bindir="$ENCODE_LIB/bin"
         - make
         - make install
         - make distclean
@@ -15,6 +16,7 @@
     dir: x264
     commands:
         - ./configure 
+        #PKG_CONFIG_PATH="$ENCODE_LIB/ffmpeg_build" ./configure --prefix="$ENCODE_LIB/ffmpeg_build" --bindir="$ENCODE_LIB/bin" --enable-static
         - make
         - make install
         - make distclean

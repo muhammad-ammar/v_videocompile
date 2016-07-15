@@ -40,20 +40,18 @@ class FFCompiler():
             ), 
             'ffmpeg_binary.yaml'
             )
-        CF = OVConfig()
+        CF = OVConfig(test=True)
         CF.run()
         self.settings = CF.settings_dict
 
 
 
     def check(self):
+        print self.settings
         """
         an attempt to submerge some of the process
         """
-        try:
-            self.settings['ffmpeg']
-        except:
-            return False
+
         process = subprocess.Popen(
             self.settings['ffmpeg'], 
             stdout=subprocess.PIPE, 
@@ -147,6 +145,7 @@ class FFCompiler():
 
 def main():
     FF = FFCompiler()
+    print FF.settings
     FF.check()
     print FF.check()
 
