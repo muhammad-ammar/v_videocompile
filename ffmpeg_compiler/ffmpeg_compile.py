@@ -69,6 +69,25 @@ class FFCompiler():
 
 
     def run(self):
+        if os.path.exists(self.FF_DIR):
+            os.remove(self.FF_DIR)
+
+        x = os.system('apt-get install -y install autoconf automake build-essential libass-dev libfreetype6-dev \
+            libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
+            libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev')
+        if x > 0:
+            x = os.system('yum install -y autoconf automake cmake freetype-devel gcc gcc-c++ git libtool make \
+                mercurial nasm pkgconfig zlib-devel libXext-devel libXfixes-devel x264-devel zlib-devel')
+
+        if x > 0:
+            x = os.system('brew install -y install automake fdk-aac git lame libass libtool libvorbis libvpx \
+                opus sdl shtool texi2html theora wget x264 xvid yasm')
+        if x > 0:
+                raise ErrorObject().print_error(
+                    message='FFmpeg install\nVisit https://ffmpeg.org for install instructions\n'
+                    )
+                return None
+
         if not os.path.exists(self.FF_DIR):
             os.mkdir(self.FF_DIR)
 
@@ -108,6 +127,10 @@ class FFCompiler():
 
 
     def _EXEC(self, command):
+        """
+        surfaced output
+        """
+        # os.system(command)
         """
         submerged output
         """
