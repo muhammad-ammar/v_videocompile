@@ -3,7 +3,7 @@ Script to compile ffmpeg
 
 ##Intro
 
-##NOTE: Incomplete
+##NOTE: ¡THIS Is INCOMPLETE!
 
     from ffcompiler import FFInstall
 
