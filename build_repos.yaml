@@ -3,17 +3,6 @@
 # Build repos and dependencies
 ####---####
 
-# x264
-- x264:
-    url: --depth 1 git://git.videolan.org/x264
-    dir: x264
-    commands:
-        - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" 
-        - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
-        - make
-        - make install
-        # - make distclean
-
 # LAME
 - LAME:
     url: curl -L -O http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
@@ -23,7 +12,6 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm
         - make
         - make install
-        # - make distclean
 
 ##
 # For open Codecs
@@ -37,7 +25,6 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --disable-shared
         - make
         - make install
-        # - make distclean
 
 # Vorbis
 - Vorbis:
@@ -50,7 +37,6 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared
         - make
         - make install
-        # - make distclean
 
 # VP8 / VP9
 - VP8:
@@ -60,7 +46,16 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --disable-examples
         - make
         - make install
-        # - make clean
+
+# x264
+- x264:
+    url: --depth 1 git://git.videolan.org/x264
+    dir: x264
+    commands:
+        - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" 
+        - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
+        - make
+        - make install
 
 # ffmpeg
 - ffmpeg:
@@ -72,7 +67,6 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libfreetype --enable-libmp3lame --enable-libvorbis --enable-libvpx --enable-libx264
         - make
         - make install
-        # - make distclean
 
 ...
 

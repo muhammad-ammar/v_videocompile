@@ -23,8 +23,7 @@ class VideoCompile():
 
     def __init__(self, **kwargs):
 
-        self.complete = False
-
+        self.debug = False
         self.compile_dir = kwargs.get(
             'compile_dir', 
                 os.path.join(
@@ -225,40 +224,34 @@ class VideoCompile():
 
 
     def _EXEC(self, command):
-        """
-        submerged/oneline output
-        """
-        # if platform.system() == 'Linux':
-        #     command = 'sudo ' + command
+        if self.debug is True:
+            os.system(command)
+        else:
+            """
+            submerged/oneline output
+            """
+            process = subprocess.Popen(
+                command, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.STDOUT, 
+                shell=True, 
+                universal_newlines=True
+                )
 
-        process = subprocess.Popen(
-            command, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.STDOUT, 
-            shell=True, 
-            universal_newlines=True
-            )
+            """
+            show process wheel
+            """
+            wheel = {0: '|', 1: '/', 2: '-', 3: '\\'}
+            x = 0
+            for line in iter(process.stdout.readline, b''):
+                sys.stdout.write('\r')
+                sys.stdout.flush()
+                sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
+                x += 1
+                if x == 4:
+                    x = 0
 
-        """
-        show process wheel
-        """
-        wheel = {0: '|', 1: '/', 2: '-', 3: '\\'}
-        x = 0
-        for line in iter(process.stdout.readline, b''):
-            ###
-            # On for debugging
-            ###
-            print line.replace('\n', '')
-            ###-wheel 
-
-            # sys.stdout.write('\r')
-            # sys.stdout.flush()
-            # sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
-            # x += 1
-            # if x == 4:
-            #     x = 0
-
-        sys.stdout.write('\n')
+            sys.stdout.write('\n')
 
 
 def main():
