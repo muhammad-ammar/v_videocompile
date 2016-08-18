@@ -193,24 +193,24 @@ class VideoCompile():
             -or- 
             curl & expand
             '''
-            # if 'curl' in entry['url']:
-            #     os.system(entry['url'])
-            #     self._EXEC(command=entry['unpack'])
-            # else:
-            #     os.system('%s %s' % ('git clone', entry['url']))
+            if 'curl' in entry['url']:
+                os.system(entry['url'])
+                self._EXEC(command=entry['unpack'])
+            else:
+                os.system('%s %s' % ('git clone', entry['url']))
 
-            # if not os.path.exists(
-            #     os.path.join(self.compile_dir, entry['dir'])
-            #     ):
-            #     print '[ERROR] : expansion problem'
-            #     return None
+            if not os.path.exists(
+                os.path.join(self.compile_dir, entry['dir'])
+                ):
+                print '[ERROR] : expansion problem'
+                return None
 
-            # """
-            # compile dependency
-            # """
-            # os.chdir(entry['dir'])
-            # for c in entry['commands']:
-            #     self._EXEC(command=c)
+            """
+            compile dependency
+            """
+            os.chdir(entry['dir'])
+            for c in entry['commands']:
+                self._EXEC(command=c)
 
 
     def _EXEC(self, command):
