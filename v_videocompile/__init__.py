@@ -187,31 +187,39 @@ class VideoCompile():
         run dependency builds
         """
         for key, entry in library.iteritems():
-            # clone or curl&expand
-            if 'curl' in entry['url']:
-                os.system(entry['url'])
-                self._EXEC(command=entry['unpack'])
-            else:
-                os.system('%s %s' % ('git clone', entry['url']))
+            print key
+            '''
+            clone 
+            -or- 
+            curl & expand
+            '''
+            # if 'curl' in entry['url']:
+            #     os.system(entry['url'])
+            #     self._EXEC(command=entry['unpack'])
+            # else:
+            #     os.system('%s %s' % ('git clone', entry['url']))
 
-            if not os.path.exists(
-                os.path.join(self.compile_dir, entry['dir'])
-                ):
-                print '[ERROR] : expansion problem'
-                return None
+            # if not os.path.exists(
+            #     os.path.join(self.compile_dir, entry['dir'])
+            #     ):
+            #     print '[ERROR] : expansion problem'
+            #     return None
 
-            """
-            compile dependency
-            """
-            os.chdir(entry['dir'])
-            for c in entry['commands']:
-                self._EXEC(command=c)
+            # """
+            # compile dependency
+            # """
+            # os.chdir(entry['dir'])
+            # for c in entry['commands']:
+            #     self._EXEC(command=c)
 
 
     def _EXEC(self, command):
         """
         submerged/oneline output
         """
+        if platform.system() == 'Linux':
+            command = 'sudo ' + command
+
         process = subprocess.Popen(
             command, 
             stdout=subprocess.PIPE, 
@@ -226,12 +234,14 @@ class VideoCompile():
         wheel = {0: '|', 1: '/', 2: '-', 3: '\\'}
         x = 0
         for line in iter(process.stdout.readline, b''):
-            sys.stdout.write('\r')
-            sys.stdout.flush()
-            sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
-            x += 1
-            if x == 4:
-                x = 0
+            print line.replace('\n', '')
+
+            # sys.stdout.write('\r')
+            # sys.stdout.flush()
+            # sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
+            # x += 1
+            # if x == 4:
+            #     x = 0
 
         sys.stdout.write('\n')
 
