@@ -201,7 +201,7 @@ class VideoCompile():
                 self._EXEC(command=entry['unpack'])
 
             else:
-                if platform.system() != 'Linux'
+                if platform.system() != 'Linux':
                     os.system('%s %s' % ('git clone', entry['url']))
                 else:
                     os.system('%s %s' % ('sudo git clone', entry['url']))
