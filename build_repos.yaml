@@ -12,7 +12,7 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
         - make
         - make install
-        - make distclean
+        # - make distclean
 
 # LAME
 - LAME:
@@ -23,7 +23,7 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm
         - make
         - make install
-        - make distclean
+        # - make distclean
 
 ##
 # For open Codecs
@@ -37,7 +37,7 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --disable-shared
         - make
         - make install
-        - make distclean
+        # - make distclean
 
 # Vorbis
 - Vorbis:
@@ -50,7 +50,7 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared
         - make
         - make install
-        - make distclean
+        # - make distclean
 
 # VP8 / VP9
 - VP8:
@@ -60,7 +60,7 @@
         - ./configure --prefix="$HOME/ffmpeg_build" --disable-examples
         - make
         - make install
-        - make clean
+        # - make clean
 
 # ffmpeg
 - ffmpeg:

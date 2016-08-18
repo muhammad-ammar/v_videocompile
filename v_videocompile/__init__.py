@@ -218,6 +218,9 @@ class VideoCompile():
             """
             os.chdir(entry['dir'])
             for c in entry['commands']:
+                print '***********'
+                print c
+                print '***********'
                 self._EXEC(command=c)
 
 
