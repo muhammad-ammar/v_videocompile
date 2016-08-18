@@ -58,7 +58,7 @@
 
 #VP8 / VP9
 - VP8:
-    url: git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git
+    url: --depth 1 https://chromium.googlesource.com/webm/libvpx.git
     dir: libvpx
     commands:
         - ./configure --prefix="$HOME/ffmpeg_build" --disable-examples

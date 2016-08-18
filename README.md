@@ -1,4 +1,4 @@
-# ff_compiler
+# V_Videocompile
 Master repo to compile ffmpeg for veda & veda subsidiaries
 
 ## Intro
@@ -26,4 +26,11 @@ This will check for an extant ffmpeg install, and install if the generalized she
         compile_dir=${optional directory}
         )
     F.run()
+
+
+
+
+This software uses code of FFmpeg licensed under the LGPLv2.1 and its source can be
+downloaded here:
+    http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.bz2
 

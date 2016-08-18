@@ -7,14 +7,14 @@ def readme():
         return f.read()
 
 setup(
-    name='ff_compiler',
+    name='v_videocompile',
     version='0.1',
-    description='Script to compile ffmpeg',
-    url='http://github.com/yro/ff_compiler',
+    description='Script to compile video tools for VEDA',
+    url='http://github.com/yro/v_videocompile',
     author='@yro',
     author_email='greg@willowgrain.io',
     license='',
-    packages=['ff_compiler'],
+    packages=['v_videocompile'],
     include_package_data=True,
     install_requires=[
         'pyyaml',
@@ -24,9 +24,4 @@ setup(
     tests_require=['nose'],
     zip_safe=False
     )
-
-
-FF = FFCompiler()
-if FF.check() is False:
-    FF.run()
 

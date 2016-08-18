@@ -8,13 +8,13 @@ pip test
 
 """
 
-from ffmpeg_compiler import FFCompiler
+from v_videocompile import VideoCompile
 
 
 def test():
 
-    F = FFCompiler()
-    F.run()
+    V = VideoCompile()
+    V.run()
 
 if __name__ == '__main__':
     test()
