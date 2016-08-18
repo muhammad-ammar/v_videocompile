@@ -6,6 +6,9 @@ import subprocess
 import platform
 import shutil
 
+from os.path import expanduser
+home = expanduser("~")
+
 """
 Download and compile ffmpeg if absent, including
 dependencies
@@ -24,11 +27,9 @@ class VideoCompile():
 
         self.compile_dir = kwargs.get(
             'compile_dir', 
-            os.path.join(
-                os.path.dirname(os.path.dirname(os.path.dirname(
-                    os.path.abspath(__file__)
-                    ))),
-                'ffmpeg'
+                os.path.join(
+                home,
+                'ffmpeg_sources'
                 )
             )
 
@@ -201,10 +202,10 @@ class VideoCompile():
                 self._EXEC(command=entry['unpack'])
 
             else:
-                if platform.system() != 'Linux':
-                    os.system('%s %s' % ('git clone', entry['url']))
-                else:
-                    os.system('%s %s' % ('sudo git clone', entry['url']))
+                # if platform.system() != 'Linux':
+                os.system('%s %s' % ('git clone', entry['url']))
+                # else:
+                    # os.system('%s %s' % ('sudo git clone', entry['url']))
 
             if not os.path.exists(
                 os.path.join(self.compile_dir, entry['dir'])
@@ -224,8 +225,8 @@ class VideoCompile():
         """
         submerged/oneline output
         """
-        if platform.system() == 'Linux':
-            command = 'sudo ' + command
+        # if platform.system() == 'Linux':
+        #     command = 'sudo ' + command
 
         process = subprocess.Popen(
             command, 

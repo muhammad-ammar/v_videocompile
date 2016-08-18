@@ -8,7 +8,8 @@
     url: --depth 1 git://git.videolan.org/x264
     dir: x264
     commands:
-        - PKG_CONFIG_PATH="$HOME/ffmpeg/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg" --bindir="$HOME/ffmpeg/bin" --enable-static
+        - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" 
+        - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
         - make
         - make install
         - make distclean
@@ -19,14 +20,14 @@
     unpack: tar xzvf lame-3.99.5.tar.gz
     dir: lame-3.99.5
     commands:
-        - ./configure --prefix="$HOME/ffmpeg/" --bindir="$HOME/ffmpeg/bin" --disable-shared --enable-nasm
+        - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm
 #         - ./configure --prefix="/usr" --disable-shared --enable-nasm
         - make
         - make install
         - make distclean
 
 ##
-# For open Codecs
+# For open Codecs // covered by yum
 ##
 # LibOgg
 # - OGG:
@@ -34,7 +35,7 @@
 #     unpack: tar xzvf libogg-1.3.2.tar.gz
 #     dir: libogg-1.3.2
 #     commands:
-#         - ./configure --disable-shared
+#         - ./configure --prefix="$HOME/ffmpeg_build" --disable-shared
 #         - make
 #         - make install
 #         - make distclean
@@ -45,9 +46,9 @@
 #     unpack: tar xzvf libvorbis-1.3.4.tar.gz
 #     dir: libvorbis-1.3.4
 #     commands:
-#         # - LDFLAGS="-L$HOME/ffmeg_build/lib" 
-#         # - CPPFLAGS="-I$HOME/ffmpeg_build/include" 
-#         - ./configure --with-ogg --disable-shared
+#         - LDFLAGS="-L$HOME/ffmeg_build/lib" 
+#         - CPPFLAGS="-I$HOME/ffmpeg_build/include" 
+#         - ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared
 #         - make
 #         - make install
 #         - make distclean
@@ -57,7 +58,7 @@
 #     url: --depth 1 https://chromium.googlesource.com/webm/libvpx.git
 #     dir: libvpx
 #     commands:
-#         - ./configure --disable-examples
+#         - ./configure --prefix="$HOME/ffmpeg_build" --disable-examples
 #         - make
 #         - make install
 #         - make clean
@@ -68,8 +69,11 @@
     url: https://git.ffmpeg.org/ffmpeg.git ffmpeg
     dir: ffmpeg
     commands:
-        - PKG_CONFIG_PATH="$HOME/ffmpeg/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg/" --extra-cflags="-I$HOME/ffmpeg/include" --extra-ldflags="-L$HOME/ffmpeg/lib" --bindir="$HOME/ffmpeg/bin" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libx264 --disable-ffplay --disable-ffserver  
-        - ./configure --extra-cflags="-I/usr" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libx264 --enable-libmp3lame --disable-ffplay --disable-ffserver  
+        - PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig"
+        ## with open codecs
+        - ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264
+        ## without
+        # - ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libfreetype --enable-libmp3lame --enable-libx264
         - make
         - make install
         - make distclean
