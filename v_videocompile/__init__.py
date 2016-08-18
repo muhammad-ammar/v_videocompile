@@ -9,63 +9,67 @@ Download and compile ffmpeg if absent / can run as part of test suite
 or as part of setup. Will eventually live in separate repo.
 
 """
-sys.path.append(os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    'openveda'
-    ))
-from config import OVConfig
-from reporting import ErrorObject
+# sys.path.append(os.path.join(
+#     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+#     'openveda'
+#     ))
+# from config import OVConfig
+# from reporting import ErrorObject
 
 
 
 class FFCompiler():
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         self.complete = False
 
-        self.FF_DIR = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            'ffmpeg_build'
+        self.compile_dir = kwargs.get(
+            'compile_dir', 
+            os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                'ffmpeg'
+                )
             )
-        self.ff_repos = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
+
+        self.ffmpeg_repos = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
             'ffmpeg_repos.yaml'
             )
         self.repo_list = None
-        self.ff_yaml = os.path.join(
-            os.path.dirname(os.path.dirname(
-                os.path.abspath(__file__)
-                )
-            ), 
-            'ffmpeg_binary.yaml'
-            )
-        CF = OVConfig(test=True)
-        CF.run()
-        self.settings = CF.settings_dict
+        # self.ff_yaml = os.path.join(
+        #     os.path.dirname(os.path.dirname(
+        #         os.path.abspath(__file__)
+        #         )
+        #     ), 
+        #     'ffmpeg_binary.yaml'
+        #     )
+        # CF = OVConfig(test=True)
+        # CF.run()
+        # self.settings = CF.settings_dict
 
 
 
-    def check(self):
-        print self.settings
-        """
-        an attempt to submerge some of the process
-        """
+    # def check(self):
+    #     print self.settings
+    #     """
+    #     an attempt to submerge some of the process
+    #     """
 
-        process = subprocess.Popen(
-            self.settings['ffmpeg'], 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.STDOUT, 
-            shell=True, 
-            universal_newlines=True
-            )
+    #     process = subprocess.Popen(
+    #         self.settings['ffmpeg'], 
+    #         stdout=subprocess.PIPE, 
+    #         stderr=subprocess.STDOUT, 
+    #         shell=True, 
+    #         universal_newlines=True
+    #         )
 
-        for line in iter(process.stdout.readline, b''):
-            if 'ffmpeg version' in line:
-                return True
-            if 'ffmpeg: command not found' in line:
-                return False
-        return False
+    #     for line in iter(process.stdout.readline, b''):
+    #         if 'ffmpeg version' in line:
+    #             return True
+    #         if 'ffmpeg: command not found' in line:
+    #             return False
+    #     return False
 
 
     def run(self):
