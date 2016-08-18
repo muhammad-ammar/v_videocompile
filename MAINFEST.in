@@ -1,2 +1,3 @@
-include /build_repos.yaml
+
+include build_repos.yaml
 include README.md

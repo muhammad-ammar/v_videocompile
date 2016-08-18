@@ -1,6 +1,6 @@
 
 from setuptools import setup
-
+data_files 
 
 def readme():
     with open('README.md') as f:
@@ -15,11 +15,12 @@ setup(
     author_email='greg@willowgrain.io',
     license='',
     packages=['v_videocompile'],
-    include_package_data=True,
+    include_package_data=True
     install_requires=[
         'pyyaml',
         'nose',
         ],
+    data_files=['build_repos.yaml']
     scripts=['bin/v_videocompile'],
     test_suite='nose.collector',
     tests_require=['nose'],
