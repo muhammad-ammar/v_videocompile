@@ -20,6 +20,7 @@ setup(
         'pyyaml',
         'nose',
         ],
+    scripts=['bin/v_videocompile'],
     test_suite='nose.collector',
     tests_require=['nose'],
     zip_safe=False

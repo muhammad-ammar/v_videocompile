@@ -1,2 +1,2 @@
-include ffmpeg_repos.yaml
-include README.rst
+include build_repos.yaml
+include README.md
