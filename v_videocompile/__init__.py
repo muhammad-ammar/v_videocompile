@@ -242,14 +242,13 @@ class VideoCompile():
         wheel = {0: '|', 1: '/', 2: '-', 3: '\\'}
         x = 0
         for line in iter(process.stdout.readline, b''):
-            print line.replace('\n', '')
-
-            # sys.stdout.write('\r')
-            # sys.stdout.flush()
-            # sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
-            # x += 1
-            # if x == 4:
-            #     x = 0
+            # print line.replace('\n', '')
+            sys.stdout.write('\r')
+            sys.stdout.flush()
+            sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
+            x += 1
+            if x == 4:
+                x = 0
 
         sys.stdout.write('\n')
 
