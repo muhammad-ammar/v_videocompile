@@ -246,6 +246,8 @@ class VideoCompile():
             # On for debugging
             ###
             print line.replace('\n', '')
+            ###-wheel 
+
             # sys.stdout.write('\r')
             # sys.stdout.flush()
             # sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
