@@ -25,9 +25,9 @@ class VideoCompile():
         self.compile_dir = kwargs.get(
             'compile_dir', 
             os.path.join(
-                os.path.dirname(os.path.dirname(
+                os.path.dirname(os.path.dirname(os.path.dirname(
                     os.path.abspath(__file__)
-                    )),
+                    ))),
                 'ffmpeg'
                 )
             )
@@ -103,22 +103,24 @@ class VideoCompile():
 
     def ubuntu_prep(self):
         x = os.system(
-            'apt-get install -y install autoconf automake \
+            'sudo apt-get install -y install yasm autoconf automake \
             build-essential libass-dev libfreetype6-dev \
             libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev \
             libvorbis-dev libxcb1-dev libxcb-shm0-dev \
-            libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev'
+            libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev \
+            libvpx libvorbis libogg'
             )
+
         if x > 0:
             return False
         return True
 
     def centos_prep(self):
         x = os.system(
-            'yum install -y autoconf automake cmake \
-            freetype-devel gcc gcc-c++ git libtheora-dev libtool make \
-            mercurial nasm pkgconfig zlib-devel libXext-devel \
-            libXfixes-devel x264-devel zlib-devel'
+            'sudo yum -y install yasm autoconf automake cmake \
+            freetype-devel gcc gcc-c++ git libtool make \
+            mercurial nasm pkgconfig zlib-devel \
+            libvpx libvorbis libogg'
             )
         if x > 0:
             return False
@@ -150,9 +152,10 @@ class VideoCompile():
                 
         if x == 0:
             x = os.system(
-                'brew install -y  automake fdk-aac git lame\
-                libass libtool libvorbis libvpx opus sdl shtool texi2html\
-                theora wget x264 xvid yasm'
+                'brew install -y automake yasm fdk-aac git lame\
+                libass libtool opus sdl shtool texi2html\
+                theora wget x264 xvid  \
+                libvpx libvorbis libogg'
                 )
 
         return True
@@ -196,8 +199,12 @@ class VideoCompile():
             if 'curl' in entry['url']:
                 os.system(entry['url'])
                 self._EXEC(command=entry['unpack'])
+
             else:
-                os.system('%s %s' % ('git clone', entry['url']))
+                if platform.system() != 'Linux'
+                    os.system('%s %s' % ('git clone', entry['url']))
+                else:
+                    os.system('%s %s' % ('sudo git clone', entry['url']))
 
             if not os.path.exists(
                 os.path.join(self.compile_dir, entry['dir'])
