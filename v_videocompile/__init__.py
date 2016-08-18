@@ -109,7 +109,7 @@ class VideoCompile():
             libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev \
             libvorbis-dev libxcb1-dev libxcb-shm0-dev \
             libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev \
-            libvpx libvorbis libogg'
+            libvpx' #libvorbis libogg'
             )
 
         if x > 0:
@@ -121,7 +121,7 @@ class VideoCompile():
             'sudo yum -y install yasm autoconf automake cmake \
             freetype-devel gcc gcc-c++ git libtool make \
             mercurial nasm pkgconfig zlib-devel \
-            libvpx libvorbis libogg'
+            libvpx' # libvorbis libogg'
             )
         if x > 0:
             return False
@@ -156,7 +156,7 @@ class VideoCompile():
                 'brew install -y automake yasm fdk-aac git lame\
                 libass libtool opus sdl shtool texi2html\
                 theora wget x264 xvid  \
-                libvpx libvorbis libogg'
+                libvpx' # libvorbis libogg'
                 )
 
         return True
@@ -242,13 +242,16 @@ class VideoCompile():
         wheel = {0: '|', 1: '/', 2: '-', 3: '\\'}
         x = 0
         for line in iter(process.stdout.readline, b''):
-            # print line.replace('\n', '')
-            sys.stdout.write('\r')
-            sys.stdout.flush()
-            sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
-            x += 1
-            if x == 4:
-                x = 0
+            ###
+            # On for debugging
+            ###
+            print line.replace('\n', '')
+            # sys.stdout.write('\r')
+            # sys.stdout.flush()
+            # sys.stdout.write("%s : %s" % ('Buildout', wheel[x]))
+            # x += 1
+            # if x == 4:
+            #     x = 0
 
         sys.stdout.write('\n')
 
