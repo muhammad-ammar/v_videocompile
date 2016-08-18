@@ -1,7 +1,6 @@
 # ff_compiler
 Master repo to compile ffmpeg for veda & veda subsidiaries
 
-
 ## Intro
 There wasn't a good, universal *nix solution to compiling ffmpeg on various
 node, ingest, and worker machines, so I made this. It's simple, ugly, and should
