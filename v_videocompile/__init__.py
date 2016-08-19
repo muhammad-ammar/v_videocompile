@@ -67,19 +67,29 @@ class VideoCompile():
             return None
 
         self.buildout()
-        print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
+        print '%s : %s' % (
+            'ffmpeg/ffprobe installed', self.check()
+            )
         if self.check() is True:
+            print '%s : %s' % (
+                'ffmpeg/ffprobe installed', self.check()
+                )
             return None
 
         """
         failover to polite compile
         """
         self.polite_buildout()
-        print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
+        print '%s : %s' % (
+            'ffmpeg/ffprobe installed', self.check()
+            )
 
 
     def drun(self):
         if self.check() is True:
+            print '%s : %s' % (
+                'ffmpeg/ffprobe installed', self.check()
+                )
             return None
 
         """
@@ -310,10 +320,12 @@ class VideoCompile():
                     --with-freetype --with-libass --with-libquvi \
                     --with-libvorbis --with-libvpx --with-opus --with-x265'
                 )
+            os.system('brew link --overwrite ffmpeg')
 
 
 def main():
     pass
+
 
 if __name__ == '__main__':
     sys.exit(main())
