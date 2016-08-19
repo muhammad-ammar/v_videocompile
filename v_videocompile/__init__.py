@@ -68,6 +68,13 @@ class VideoCompile():
 
         self.buildout()
         print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
+        if self.check() is True:
+            return None
+
+        """
+        failover to polite compile
+        """
+        self.polite_buildout()
 
 
     def drun(self):
@@ -190,25 +197,6 @@ class VideoCompile():
         return True
 
 
-    def polite_buildout(self):
-        if platform.system() == 'Linux':
-            os.mkdir(os.path.join(self.compile_dir, ffmpeg))
-            os.chdir(os.path.join(self.compile_dir, ffmpeg))
-            os.system(
-                'wget \
-                    http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
-                )
-            os.system('tar -xf ffmpeg-release-64bit-static.tar.xz')
-            os.system('ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg /usr/bin/ffmpeg')
-
-        elif platform.system() == 'Darwin':
-            os.system(
-                'brew install ffmpeg --with-fdk-aac --with-ffplay \
-                    --with-freetype --with-libass --with-libquvi \
-                    --with-libvorbis --with-libvpx --with-opus --with-x265'
-                )
-
-
     def buildout(self):
         with open(self.build_repos, 'r') as stream:
             try:
@@ -293,6 +281,25 @@ class VideoCompile():
                     x = 0
 
             sys.stdout.write('\n')
+
+
+    def polite_buildout(self):
+        if platform.system() == 'Linux':
+            os.mkdir(os.path.join(self.compile_dir, ffmpeg))
+            os.chdir(os.path.join(self.compile_dir, ffmpeg))
+            os.system(
+                'wget \
+                    http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
+                )
+            os.system('tar -xf ffmpeg-release-64bit-static.tar.xz')
+            os.system('ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg /usr/bin/ffmpeg')
+
+        elif platform.system() == 'Darwin':
+            os.system(
+                'brew install ffmpeg --with-fdk-aac --with-ffplay \
+                    --with-freetype --with-libass --with-libquvi \
+                    --with-libvorbis --with-libvpx --with-opus --with-x265'
+                )
 
 
 def main():
