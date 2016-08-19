@@ -315,7 +315,7 @@ class VideoCompile():
                 if os.path.isdir(os.path.join(self.compile_dir, f)):
                     ff_build = os.path.join(self.compile_dir, f, 'ffmpeg')
 
-            print(' '.join((
+            os.system(' '.join((
                 'sudo ln -s',
                 ff_build,
                 '/usr/bin/ffmpeg'
