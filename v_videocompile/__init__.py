@@ -172,7 +172,7 @@ class VideoCompile():
 
         ALSO NOTE:
         there's a brew command to install ffmpeg -- so feel free to 
-        use that:
+        use that (it's in polite_buildout()):
 
             '''
             brew install ffmpeg --with-fdk-aac --with-ffplay \
@@ -292,8 +292,8 @@ class VideoCompile():
         """
 
         if platform.system() == 'Linux':
-            os.mkdir(os.path.join(self.compile_dir, 'ffmpeg'))
-            os.chdir(os.path.join(self.compile_dir, 'ffmpeg'))
+            os.mkdir(os.path.join(self.compile_dir)
+            os.chdir(os.path.join(self.compile_dir)
             os.system(
                 'wget \
                     http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
