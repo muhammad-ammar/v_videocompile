@@ -59,7 +59,7 @@
 #---#
 # For some reason this needs to double install (?)
 #---#
-x264
+# x264
 - x264:
     url: --depth 1 git://git.videolan.org/x264
     dir: x264
