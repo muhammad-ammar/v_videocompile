@@ -292,8 +292,8 @@ class VideoCompile():
         """
 
         if platform.system() == 'Linux':
-            os.mkdir(os.path.join(self.compile_dir)
-            os.chdir(os.path.join(self.compile_dir)
+            os.mkdir(os.path.join(self.compile_dir))
+            os.chdir(os.path.join(self.compile_dir))
             os.system(
                 'wget \
                     http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
