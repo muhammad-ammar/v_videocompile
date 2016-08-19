@@ -284,9 +284,15 @@ class VideoCompile():
 
 
     def polite_buildout(self):
+        """
+        This should act as a temporary failsafe. 
+        I don't love the dependencies here, but this will get the node up
+        :::
+        """
+
         if platform.system() == 'Linux':
-            os.mkdir(os.path.join(self.compile_dir, ffmpeg))
-            os.chdir(os.path.join(self.compile_dir, ffmpeg))
+            os.mkdir(os.path.join(self.compile_dir, 'ffmpeg'))
+            os.chdir(os.path.join(self.compile_dir, 'ffmpeg'))
             os.system(
                 'wget \
                     http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
