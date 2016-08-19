@@ -75,6 +75,7 @@ class VideoCompile():
         failover to polite compile
         """
         self.polite_buildout()
+        print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
 
 
     def drun(self):
@@ -298,7 +299,10 @@ class VideoCompile():
                     http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
                 )
             os.system('tar -xf ffmpeg-release-64bit-static.tar.xz')
-            os.system('ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg /usr/bin/ffmpeg')
+            os.system(
+                'sudo ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg \
+                    /usr/bin/ffmpeg'
+                )
 
         elif platform.system() == 'Darwin':
             os.system(

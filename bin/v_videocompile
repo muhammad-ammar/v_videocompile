@@ -7,7 +7,10 @@ Shell
 
 """
 
+#--NOTE: this isn't compiling politely (throwing x264 errors)
+# and I need to move on, transitioning to a 'polite' install
+
 from v_videocompile import VideoCompile
 V = VideoCompile()
-V.run()
+V.drun()
 
