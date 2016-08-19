@@ -42,6 +42,19 @@ class VideoCompile():
 
 
     def run(self):
+        """
+        NOTE:
+        I was unable to get this to work politely with a variety of 
+        systems with any reliability, so I might back off
+
+        old run (manual compile) is 'run()'
+        new run (less good, more polite) is drun()
+        """
+        if os.path.exists(self.compile_dir):
+            shutil.rmtree(self.compile_dir)
+
+        os.mkdir(self.compile_dir)
+
         if self.check() is True:
             return None
 
@@ -54,6 +67,22 @@ class VideoCompile():
             return None
 
         self.buildout()
+        print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
+
+
+    def drun(self):
+        if self.check() is True:
+            return None
+
+        """
+        Run through compilation steps
+        """
+        if self.prepare() is False:
+            print '[ERROR] : FFmpeg install...\
+                Visit https://ffmpeg.org for instructions'
+            return None
+
+        self.polite_buildout()
         print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
 
 
@@ -161,14 +190,26 @@ class VideoCompile():
         return True
 
 
-    def buildout(self):
-        
-        if os.path.exists(self.compile_dir):
-            shutil.rmtree(self.compile_dir)
-            # os.mkdir(self.compile_dir)
-        # else:
-        os.mkdir(self.compile_dir)
+    def polite_buildout(self):
+        if platform.system() == 'Linux':
+            os.mkdir(os.path.join(self.compile_dir, ffmpeg))
+            os.chdir(os.path.join(self.compile_dir, ffmpeg))
+            os.system(
+                'wget \
+                    http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
+                )
+            os.system('tar -xf ffmpeg-release-64bit-static.tar.xz')
+            os.system('ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg /usr/bin/ffmpeg')
 
+        elif platform.system() == 'Darwin':
+            os.system(
+                'brew install ffmpeg --with-fdk-aac --with-ffplay \
+                    --with-freetype --with-libass --with-libquvi \
+                    --with-libvorbis --with-libvpx --with-opus --with-x265'
+                )
+
+
+    def buildout(self):
         with open(self.build_repos, 'r') as stream:
             try:
                 self.build_list = yaml.load(stream)

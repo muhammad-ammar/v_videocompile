@@ -52,10 +52,22 @@
     url: --depth 1 git://git.videolan.org/x264
     dir: x264
     commands:
-        - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" 
+        - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig"
         - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
         - make
         - make install
+#---#
+# For some reason this needs to double install (?)
+#---#
+# x264
+# - x264:
+#     url: --depth 1 git://git.videolan.org/x264
+#     dir: x264
+#     commands:
+#         - export PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig"
+#         - ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static
+#         - make
+#         - make install
 
 # ffmpeg
 - ffmpeg:
