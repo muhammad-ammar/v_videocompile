@@ -302,17 +302,24 @@ class VideoCompile():
         """
 
         if platform.system() == 'Linux':
-            os.mkdir(os.path.join(self.compile_dir))
-            os.chdir(os.path.join(self.compile_dir))
+            if not os.path.exists(self.compile_dir):
+                os.mkdir(self.compile_dir)
+            os.chdir(self.compile_dir)
             os.system(
                 'wget \
                     http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz'
                 )
             os.system('tar -xf ffmpeg-release-64bit-static.tar.xz')
-            os.system(
-                'sudo ln -s /usr/local/bin/ffmpeg/ffmpeg-3.0.1-64bit-static/ffmpeg \
-                    /usr/bin/ffmpeg'
-                )
+
+            for f in os.listdir(self.compile_dir):
+                if os.path.isdir(os.path.join(self.compile_dir, f)):
+                    ff_build = os.path.join(self.compile_dir, f, 'ffmpeg')
+
+            print(' '.join((
+                'sudo ln -s',
+                ff_build,
+                '/usr/bin/ffmpeg'
+                )))
 
         elif platform.system() == 'Darwin':
             os.system(
