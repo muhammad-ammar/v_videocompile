@@ -23,7 +23,7 @@ class VideoCompile():
 
     def __init__(self, **kwargs):
 
-        self.debug = False
+        self.debug = kwargs.get('debug', True)
         self.compile_dir = kwargs.get(
             'compile_dir', 
                 os.path.join(
