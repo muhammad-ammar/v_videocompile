@@ -314,11 +314,17 @@ class VideoCompile():
             for f in os.listdir(self.compile_dir):
                 if os.path.isdir(os.path.join(self.compile_dir, f)):
                     ff_build = os.path.join(self.compile_dir, f, 'ffmpeg')
+                    probe_build = os.path.join(self.compile_dir, f, 'ffprobe')
 
             os.system(' '.join((
                 'sudo ln -s',
                 ff_build,
                 '/usr/bin/ffmpeg'
+                )))
+            os.system(' '.join((
+                'sudo ln -s',
+                probe_build,
+                '/usr/bin/ffprobe'
                 )))
 
         elif platform.system() == 'Darwin':
