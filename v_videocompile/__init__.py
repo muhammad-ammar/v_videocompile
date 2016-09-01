@@ -315,6 +315,8 @@ class VideoCompile():
                 if os.path.isdir(os.path.join(self.compile_dir, f)):
                     ff_build = os.path.join(self.compile_dir, f, 'ffmpeg')
                     probe_build = os.path.join(self.compile_dir, f, 'ffprobe')
+                else:
+                    os.remove(f)
 
             os.system(' '.join((
                 'sudo ln -s',

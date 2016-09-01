@@ -4,3 +4,5 @@ v_videocompile.egg-info/*
 *.pyc
 
 ffmpeg/*
+
+.DS_Store
