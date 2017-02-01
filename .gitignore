@@ -6,3 +6,11 @@ v_videocompile.egg-info/*
 ffmpeg/*
 
 .DS_Store
+
+build/
+
+.idea/
+
+workdir/
+
+dist/
