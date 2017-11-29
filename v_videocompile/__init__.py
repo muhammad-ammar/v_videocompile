@@ -18,6 +18,12 @@ could be expanded to include other use cases
 
 """
 
+class InstallError(Exception):
+    """
+    An error that occurs during ffmpeg install.
+    """
+    pass
+
 
 class VideoCompile():
 
@@ -98,7 +104,7 @@ class VideoCompile():
         if self.prepare() is False:
             print '[ERROR] : FFmpeg install...\
                 Visit https://ffmpeg.org for instructions'
-            return None
+            raise InstallError('ffmpeg installation failed')
 
         self.polite_buildout()
         print '%s : %s' % ('ffmpeg/ffprobe installed', self.check())
@@ -155,7 +161,7 @@ class VideoCompile():
             libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev \
             libvorbis-dev libxcb1-dev libxcb-shm0-dev \
             libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev \
-            libvpx' #libvorbis libogg'
+            libvpx3 libvpx-dev' #libvorbis libogg'
             )
 
         if x > 0:
